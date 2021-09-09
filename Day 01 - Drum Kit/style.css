@@ -10,7 +10,8 @@
   user-select: none; /* Standard */
 }
 
-body {
+body,
+html {
   background: url('./background.jpg') bottom center;
   background-size: cover;
   font-family: sans-serif;
