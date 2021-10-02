@@ -7,6 +7,7 @@ function main() {
   const toggle = player.querySelector('.toggle');
   const skipButtons = player.querySelectorAll('[data-skip]');
   const ranges = player.querySelectorAll('.player__slider');
+  const fullScreenBtn = player.querySelector('.full__screen');
 
   function togglePlay() {
     const method = video.paused ? 'play' : 'pause';
@@ -14,13 +15,17 @@ function main() {
   }
 
   function updateButton() {
-    const icon = this.paused ? '►' : '❚ ❚';
+    const icon = this.paused ? '►' : '❚❚';
     console.log(icon);
     toggle.textContent = icon;
   }
 
   function skip() {
   video.currentTime += parseFloat(this.dataset.skip);
+  }
+
+  function fullScreen() {
+    video.requestFullscreen();
   }
 
   function handleRangeUpdate() {
@@ -41,9 +46,11 @@ function main() {
   video.addEventListener('play', updateButton);
   video.addEventListener('pause', updateButton);
   video.addEventListener('timeupdate', handleProgress);
+  
 
   toggle.addEventListener('click', togglePlay);
   skipButtons.forEach(button => button.addEventListener('click', skip));
+  fullScreenBtn.addEventListener('click', fullScreen);
   ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
   ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
 
